@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
 			var commentsData = document.querySelector('#tab4comments').value;
 			var streetData = document.querySelector('#tab4streetname').value;
 
-			var saveString = {crime: partyData, comments:commentsData, crimeData:crimeData, usergeo:userGeoPoint, reportType:4, street:streetData};
+			var saveString = {crime: crimeData, comments:commentsData, usergeo:userGeoPoint, reportType:4, street:streetData};
 
 		} else{
 			var typeData = document.querySelector('#tab1type').value;
