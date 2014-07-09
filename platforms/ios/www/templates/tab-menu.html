@@ -1,0 +1,25 @@
+<ion-view title="ONE" class="bar-assertive">
+  <ion-content class="has-header padding"  ng-controller="ReportCtrl as report">
+  	<div class="bar fade-in bar-assertive" style="display:none;vertical-align:bottom;" id="errorBar" ng-model="errorBar" name="errorBar">
+		 Oops..Error acquiring your GPS Coordinates, please check your internet connection&nbsp;<a ng-click="report.init()" class="button-assertive button ion-refresh"> </a>
+	</div>
+    <a class="button button-block button-dark icon-left" href="#/tab/infrastructure" ng-click="report.setTab(1)">
+	 Infrastructure
+	</a>
+	<a class="button button-block button-dark icon-left" href="#/tab/elections" ng-click="report.setTab(2)">
+	  Elections
+	</a>
+	<a class="button button-block button-dark icon-left" href="#/tab/traffic" ng-click="report.setTab(3)">
+	  Traffic
+	</a>
+	<a class="button button-block button-dark icon-left" href="#/tab/crime" ng-click="report.setTab(4)">
+	  Crime
+	</a>
+  </ion-content>
+  
+</ion-view>
+<style type="text/css">
+	#backbutton{
+		display:none;
+	}
+</style>

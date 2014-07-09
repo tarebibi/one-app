@@ -1,0 +1,103 @@
+<ion-view title="ONE" class="bar-assertive">
+  <ion-content class="has-header padding">
+  	<form name="frmReport" id="frmReport" ng-model="frmReport">
+	  	<section ng-controller="ReportCtrl as report">
+		    <div class="button-bar">
+			  <a href class="button" ng-class="{ active:report.tab === 1 }" ng-click="report.setTab(1)">Terrain</a>
+			  <a href class="button" ng-class="{ active:report.tab === 2 }" ng-click="report.setTab(2)">Elections</a>
+			  <a href class="button" ng-class="{ active:report.tab === 3 }" ng-click="report.setTab(3)">Traffic</a>
+			</div>
+
+			<div class="bar fade-in bar-assertive" style="display:none;vertical-align:bottom;" id="errorBar" ng-model="errorBar" name="errorBar">
+				 Oops..Error acquiring your GPS Coordinates, please check your internet connection&nbsp;<a ng-click="report.init()" class="button-assertive button ion-refresh"> </a>
+			</div>
+			<br /><br />
+			<div ng-show="report.isSelected(1)">
+				<div class="list">
+
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Type
+				    </div>
+				    <select id="tab1type" ng-model="selectLevel1" ng-change="report.changeSelect();"  ng-options="item.type for item in report.infrastructure">
+				    	<option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Status
+				    </div>
+				   <select id="tab1status" ng-model="selectLevel2" ng-options="sitem for sitem in report.infrastructure[report.infrastructureIndex].status">
+				       <option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Issue
+				    </div>
+				   <select  id="tab1issue" ng-model="selectLevel3" ng-options="iitem for iitem in report.infrastructure[report.infrastructureIndex].issue">
+				       <option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input">
+				    <textarea placeholder="Comments" id="tab1comments"></textarea>
+				 </label>
+				</div>
+			</div>
+			<div ng-show="report.isSelected(2)">
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      Party
+				    </div>
+				    <select id="tab2party" ng-model="selectPoliticalParty" ng-options="item.party for item in report.elections">
+				    	<option>- Select -</option>
+				    </select>
+				  </label>
+				 <label class="item item-input">
+				    <textarea placeholder="Comments" id="tab2comments"></textarea>
+				 </label>
+			</div>
+			<div ng-show="report.isSelected(3)">
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      Status
+				    </div>
+				    <select id="tab3status" ng-model="selectTrafficStatus" ng-options="item for item in report.traffic[0].status">
+				    	<option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Issue
+				    </div>
+				    <select id="tab3issue" ng-model="selectTrafficIssue" ng-options="item for item in report.traffic[0].issue">
+				    	<option>- Select -</option>
+				    </select>
+				  </label>
+				 <label class="item item-input">
+				    <textarea placeholder="Comments" id="tab3comments"></textarea>
+				 </label>
+			</div>
+		</section>
+		<section ng-controller="CamCtrl as camera">
+			<div class="row">
+				<div class="col col-80">
+					<a href class="button button-block icon-left ion-camera" ng-click="camera.takePicture()">Take Photo</a>
+					<div id="gpsCoords"></div>
+				</div>
+				<div class="col">
+					<a id="myPictureLink" href="#"><img ng-model="mypicture" id="mypicture" style="width:100%;height:50px;margin-top:10px;margin-left:10px" ng-src="" /></a>
+				</div>
+			</div>
+		</section>
+		<textarea id="viewImageData" rows="3" style="display:none;"></textarea>
+		<input type="hidden" ng-model="userLocation" id="userLocation" name="userLocation" value="0,0">
+		<input type="hidden" ng-model="selectedTab" id="selectedTab" name="selectedTab" value="1">
+		<section ng-controller="ParseCtrl as testparse">
+			<a href class="button button-dark button-block ion-loading" ng-click="testparse.parseSave()">Report</a>
+		</section>
+	</form>
+				
+	
+  </ion-content>
+</ion-view>

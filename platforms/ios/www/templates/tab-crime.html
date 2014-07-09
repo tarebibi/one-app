@@ -1,0 +1,43 @@
+<ion-view title="Crime Report" class="bar-assertive">
+  <ion-content class="has-header padding">
+  	<form name="frmReport" id="frmReport" ng-model="frmReport">
+	  	<section ng-controller="ReportCtrl as report">
+		    <div>
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      Type
+				    </div>
+				    <select id="tab4crime" ng-model="selectCrimeType" ng-options="item.ctype for item in report.crime">
+				    	<option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input">
+				    <div class="input-label">
+				      Street Name
+				    </div>
+				    <input type="text" id="tab4streetname">
+				  </label>
+				 <label class="item item-input">
+				    <textarea placeholder="Comments" id="tab4comments"></textarea>
+				 </label>
+			</div>
+		</section>
+		<section ng-controller="CamCtrl as camera">
+			<div class="row">
+				<div class="col col-80">
+					<a href class="button button-block icon-left ion-camera" ng-click="camera.takePicture()">Take Photo</a>
+					<div id="gpsCoords"></div>
+				</div>
+				<div class="col">
+					<a id="myPictureLink" href="#"><img ng-model="mypicture" id="mypicture" style="width:100%;height:50px;margin-top:10px;margin-left:10px" ng-src="" /></a>
+				</div>
+			</div>
+		</section>
+		<section ng-controller="ParseCtrl as testparse">
+			<a href class="button button-dark button-block ion-loading" ng-click="testparse.parseSave()">Report</a>
+		</section>
+	</form>
+				
+	
+  </ion-content>
+</ion-view>

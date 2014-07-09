@@ -1,0 +1,63 @@
+<ion-view title="Infrastructure Report" class="bar-assertive">
+  <ion-content class="has-header padding">
+
+  	<form name="frmReport" id="frmReport" ng-model="frmReport">
+	  	<section ng-controller="ReportCtrl as report">
+			<div>
+				<div class="list">
+
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Type
+				    </div>
+				    <select id="tab1type" ng-model="selectLevel1" ng-change="report.changeSelect();"  ng-options="item.type for item in report.infrastructure">
+				    	<option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Status
+				    </div>
+				   <select id="tab1status" ng-model="selectLevel2" ng-options="sitem for sitem in report.infrastructure[report.infrastructureIndex].status">
+				       <option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input item-select">
+				    <div class="input-label">
+				      Issue
+				    </div>
+				   <select  id="tab1issue" ng-model="selectLevel3" ng-options="iitem for iitem in report.infrastructure[report.infrastructureIndex].issue">
+				       <option>- Select -</option>
+				    </select>
+				  </label>
+				  <label class="item item-input">
+				    <div class="input-label">
+				      Street Name
+				    </div>
+				    <input type="text" id="tab1streetname">
+				  </label>
+				  <label class="item item-input">
+				    <textarea placeholder="Comments" id="tab1comments"></textarea>
+				 </label>
+				</div>
+			</div>
+		</section>
+		<section ng-controller="CamCtrl as camera">
+			<div class="row">
+				<div class="col col-80">
+					<a href class="button button-block icon-left ion-camera" ng-click="camera.takePicture()">Take Photo</a>
+					<div id="gpsCoords"></div>
+				</div>
+				<div class="col">
+					<a id="myPictureLink" href="#"><img ng-model="mypicture" id="mypicture" style="width:100%;height:50px;margin-top:10px;margin-left:10px" ng-src="" /></a>
+				</div>
+			</div>
+		</section>
+		<section ng-controller="ParseCtrl as testparse">
+			<a href class="button button-dark button-block ion-loading" ng-click="testparse.parseSave()">Report</a>
+		</section>
+	</form>
+				
+	
+  </ion-content>
+</ion-view>
