@@ -1,6 +1,6 @@
 /Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes.dex : \
 /Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes/com/ionicframework/starter/BuildConfig.class \
-/Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes/com/ionicframework/starter/HelloCordova.class \
+/Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes/com/ionicframework/starter/One.class \
 /Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes/com/ionicframework/starter/R$attr.class \
 /Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes/com/ionicframework/starter/R$drawable.class \
 /Users/tarebi/sites/cordova/oneapp/platforms/android/bin/classes/com/ionicframework/starter/R$string.class \
