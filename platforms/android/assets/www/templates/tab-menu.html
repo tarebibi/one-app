@@ -1,38 +1,73 @@
-<ion-view title='<img class="title-image" src="img/header-logo.png" />' class="bar-assertive" style="background:url('img/app-bg.png') repeat-x;">
+<ion-view title='<img class="title-image" src="img/header-logo.png" height="50" />' class="bar-assertive" style="background:url('img/app-bg.png') repeat-x;">
   <ion-content class="has-header padding"  ng-controller="ReportCtrl as report">
   	<div class="bar fade-in bar-assertive" style="display:none;vertical-align:bottom;" id="errorBar" ng-model="errorBar" name="errorBar">
 		 Oops..Error acquiring your GPS Coordinates, please check your internet connection&nbsp;<a ng-click="report.init()" class="button-assertive button ion-refresh"> </a>
 	</div>
-	<div class="card">
-	  <div class="item item-text-wrap">
-	  	Some introductory text goes here to fill users in on what One App is and how to use it.
-	  </div>
-	</div>
-
-	<div class="row">
-		<div class="col col-50" style="text-align:right;">
-    		<a href="#/tab/infrastructure" ng-click="report.setTab(1)">
-	 			<img src="img/infrastructure.png" border="0" style="width:100%;height:auto;" />
-			</a>
-		</div>
-		<div class="col col-50">
-    		<a href="#/tab/elections" ng-click="report.setTab(2)">
-	 			<img src="img/elections.png" border="0" style="width:100%;height:auto;" />
-			</a>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col col-50" style="text-align:right;">
-    		<a href="#/tab/traffic" ng-click="report.setTab(3)">
-	 			<img src="img/traffic.png" border="0" style="width:100%;height:auto;" />
-			</a>
-		</div>
-		<div class="col col-50">
-    		<a href="#/tab/crime" ng-click="report.setTab(4)">
-	 			<img src="img/crime.png" border="0" style="width:100%;height:auto;" />
-			</a>
-		</div>
-	</div>
+	<ion-list>
+		<ion-item class="iconblock" href="#/tab/infrastructure" ng-click="report.setTab(1)">
+			<div class="row">
+				<div class="col col-20">
+			 		<img src="img/infrastructure.png" border="0" style="width:100%;height:auto;" />
+				</div>
+				<div class="col col-80 reporttitle">
+					INFRASTRUCTURE<br />REPORT
+				</div>
+			</div>
+		</ion-item>
+		<ion-item class="iconblock" href="#/tab/elections" ng-click="report.setTab(2)">	
+			<div class="row">
+				<div class="col col-20">
+			 		<img src="img/elections.png" border="0" style="width:100%;height:auto;" />
+				</div>
+				<div class="col col-80 reporttitle">
+					ELECTION<br />REPORT
+				</div>
+			</div>
+		</ion-item>
+		<ion-item class="iconblock" href="#/tab/traffic" ng-click="report.setTab(3)">
+			<div class="row">
+				<div class="col col-20">
+			 		<img src="img/traffic.png" border="0" style="width:100%;height:auto;" />
+				</div>
+				<div class="col col-80 reporttitle">
+					TRAFFIC<br />REPORT
+				</div>
+			</div>
+		</ion-item>
+		<ion-item class="iconblock" href="#/tab/crime" ng-click="report.setTab(4)">
+			<div class="row">
+				<div class="col col-20">
+			 		<img src="img/crime.png" border="0" style="width:100%;height:auto;" />
+				</div>
+				<div class="col col-80 reporttitle">
+					CRIME<br />REPORT
+				</div>
+			</div>
+		</ion-item>
+		<ion-item class="iconblock"  style="border-bottom:3px solid #666;" ng-controller="ParseCtrl as fbparse" ng-click="fbparse.logout()">
+			<div class="row">
+				<div class="col col-20">
+			 		<img src="img/logout.png" border="0" style="width:100%;height:auto;" />
+				</div>
+				<div class="col col-80 reporttitle">
+					LOGOUT
+				</div>
+			</div>
+		</ion-item>
+		<!--
+		<ion-item class="iconblock" href="#/tab/login" style="border-width:3px;" ng-click="report.setTab(4)">
+			<div class="row">
+				<div class="col col-20">
+			 		<img src="img/crime.png" border="0" style="width:100%;height:auto;" />
+				</div>
+				<div class="col col-80 reporttitle">
+					ACCOUNT
+				</div>
+			</div>
+		</ion-item>
+	-->
+		
+	</ion-list>
   </ion-content>
   
 </ion-view>

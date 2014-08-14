@@ -90,18 +90,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
- /*   .state('tab.account', {
-      url: '/account',
+    .state('tab.login', {
+      url: '/login',
       views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+        'tab-login': {
+          templateUrl: 'templates/tab-login.html',
+          controller: 'ReportCtrl'
         }
       }
-    }) */
+    })
+
+    .state('tab.register', {
+      url: '/register',
+      views: {
+        'tab-register': {
+          templateUrl: 'templates/tab-register.html',
+          controller: 'ReportCtrl'
+        }
+      }
+    })
+
+    .state('tab.resetpassword', {
+      url: '/resetpassword',
+      views: {
+        'tab-resetpassword': {
+          templateUrl: 'templates/tab-resetpassword.html',
+          controller: 'ReportCtrl'
+        }
+      }
+    })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/menu');
+  $urlRouterProvider.otherwise('/tab/login');
 
 });
 

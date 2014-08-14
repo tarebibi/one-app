@@ -1,16 +1,41 @@
-<ion-view title="Login With">
-  <ion-content class="xhas-header padding">
-    <a class="button button-block button-dark icon-left ion-social-googleplus" href="#/tab/report">
-	 Google
-	</a>
-	<a class="button button-block button-dark icon-left ion-social-facebook" href="#/tab/report">
-	  Facebook
-	</a>
-	<a class="button button-block button-dark icon-left ion-social-twitter" href="#/tab/report">
-	  Twitter
-	</a>
-	<a class="button button-block button-dark icon-left ion-social-linkedin" href="#/tab/report">
-	  LinkedIn
-	</a>
+<ion-view title='<img class="title-image" src="img/header-logo.png" height="50" />' class="bar-assertive" style="background:url('img/app-bg.png') repeat-x;" ng-controller="ParseCtrl as fbparse" data-ng-init="fbparse.init()">
+  <ion-content class="has-header padding">
+  	<div class="bar fade-in bar-assertive" style="display:none;vertical-align:bottom;" id="errorBar" name="errorBar">
+		 &nbsp;
+	</div>
+	<ion-list>
+		<ion-item class="iconblock">
+			<div class="row">
+				<div class="col col-100">
+					<div class="reporttitle col-100 col" style="text-align:center;">
+						LOGIN
+					</div>
+					<label class="item item-input">
+						<span class="input-label">User name:</span>
+						<input type="text" id="loginuser">
+					</label>
+					<label class="item item-input">
+						<span class="input-label">Password:</span>
+						<input type="password" id="loginpass">
+					</label>
+					<a class="button button-full button-light" ng-click="fbparse.userLogin()">
+						Login
+					</a>
+					<a class="button button-full button-light" href="#/tab/resetpassword">
+						Forgot Password?
+					</a>
+					<a class="button button-full button-light" href="#/tab/register">
+						Register
+					</a>
+				</div>
+			</div>
+		</ion-item>		
+	</ion-list>
   </ion-content>
+  
 </ion-view>
+<style type="text/css">
+	#backbutton{
+		display:none;
+	}
+</style>

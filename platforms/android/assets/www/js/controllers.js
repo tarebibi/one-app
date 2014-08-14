@@ -7,8 +7,122 @@ angular.module('starter.controllers', [])
 
 .controller('ParseCtrl', function($scope, $ionicLoading, $ionicPopup){
 	
-	Parse.initialize("YIAnmLsSU8H5z65u8Vh4eK9zLHBtrqC64evkOz0M", "djxMlQ6AqOXeFNuj2UaDNVAnPnoXPlwIHlGAyxaS");
 
+
+	this.init = function(){
+		// REMOVE THE LOGOUT PUT IN FOR TESTING PURPOSES
+		// Parse.User.logOut();
+
+		var currentUser = Parse.User.current();
+		if (currentUser) {
+		    window.location.href = '#/tab/menu';
+		    // alert('currentuser:'+currentUser.id);
+		}
+	};
+
+
+	this.logout = function(){
+		Parse.User.logOut();
+	    window.location.href = '#/tab/login';
+	};
+
+	this.resetPassword = function(){
+		email = document.querySelector('#resetemail').value;
+
+		if (email != ''){
+			Parse.User.requestPasswordReset(email, {
+			  success: function() {
+			    // Password reset request was sent successfully
+			    $ionicPopup.alert({
+					title: 'Success!',
+					template: 'Your password reset email has been sent to '+email
+				}).then(function(res) {
+			     window.location.href = '#/tab/login';
+			    });
+			  },
+			  error: function(error) {
+			    // Show the error message somewhere
+			    $ionicPopup.alert({
+					title: 'Error: '+ error.code,
+					template: error.message
+				});
+			  }
+			});
+		} else {
+			$ionicPopup.alert({
+				title: 'Error',
+				template: 'Please enter an email address'
+			});
+		}
+	};
+
+	this.userLogin = function(){
+
+		var rawusername = document.querySelector('#loginuser').value;
+		var password = document.querySelector('#loginpass').value;
+
+		var username = rawusername.toLowerCase();
+
+
+		if (username != '' && password != ''){
+			Parse.User.logIn(username, password, {
+			  success: function(user) {
+			    window.location.href = '#/tab/menu';
+			  },
+			  error: function(user, error) {
+			    $ionicPopup.alert({
+					title: 'Error: '+ error.code,
+					template: error.message
+				});
+			  }
+			});
+		} else {
+			$ionicPopup.alert({
+				title: 'Error',
+				template: 'Please enter your username and password'
+			});
+		}
+
+	};
+
+
+	this.userRegister = function(userRegister){
+		var rawusername = document.querySelector('#newuser').value;
+		var username = rawusername.toLowerCase();
+
+		var rawemail = document.querySelector('#newemail').value;
+		var email = rawemail.toLowerCase();
+
+		var password = document.querySelector('#newpass').value;
+
+		if (username != '' && email != '' && password != ''){
+			var user = new Parse.User();
+			user.set("username", username);
+			user.set("password", password);
+			user.set("email", email);
+			 
+			 
+			user.signUp(null, {
+			  success: function(user) {
+			    // Hooray! Let them use the app now.
+			    // go to menu
+			    window.location.href = '#/tab/menu';
+			  },
+			  error: function(user, error) {
+			    // Show the error message somewhere and let the user try again.
+			    $ionicPopup.alert({
+					title: 'Error: '+ error.code,
+					template: error.message
+				});
+			  }
+			});
+		} else {
+			$ionicPopup.alert({
+				title: 'Error!',
+				template: 'Please fill in all fields.'
+			});
+		}
+	};
 
 	this.parseSave = function(parseSave){
 		 // LoaderService.show();
@@ -16,10 +130,13 @@ angular.module('starter.controllers', [])
 	       template: 'Sending Report...'
 	     });
 
-		var TestObject = Parse.Object.extend("TestObject");
-		var testObject = new TestObject();
+		var ReportObject = Parse.Object.extend("ReportObject");
+		var reportObject = new ReportObject();
 		var currentTab = document.querySelector('#selectedTab').value;
 		var userGeoPoint = document.querySelector('#userLocation').value;
+
+		var currentUser = Parse.User.current();
+		var userID = currentUser.id;
 
 		
 		var imageData = document.querySelector('#viewImageData').value;
@@ -27,11 +144,10 @@ angular.module('starter.controllers', [])
 		
 		if (currentTab == 3){
 			var statusData = document.querySelector('#tab3status').value;
-			var issueData = document.querySelector('#tab3issue').value;
 			var commentsData = document.querySelector('#tab3comments').value;
 			var streetData = document.querySelector('#tab3streetname').value;
 
-			var saveString = {status: statusData, issue: issueData, comments:commentsData, usergeo:userGeoPoint, reportType:3, street:streetData};
+			var saveString = {status: statusData, comments:commentsData, usergeo:userGeoPoint, reportType:3, street:streetData};
 		} else if (currentTab == 2){
 
 			var partyData = document.querySelector('#tab2party').value;
@@ -49,14 +165,14 @@ angular.module('starter.controllers', [])
 
 		} else{
 			var typeData = document.querySelector('#tab1type').value;
-			var statusData = document.querySelector('#tab1status').value;
-			var issueData = document.querySelector('#tab1issue').value;
 			var commentsData = document.querySelector('#tab1comments').value;
 			var streetData = document.querySelector('#tab1streetname').value;
+			var statusData = document.querySelector('#tab1status').value;
 
-			var saveString = {type: typeData, status: statusData, issue: issueData, comments:commentsData, usergeo:userGeoPoint, reportType:1, street:streetData};
+			var saveString = {type: typeData, status: statusData, comments:commentsData, usergeo:userGeoPoint, reportType:1, street:streetData};
 
 		}
+		saveString.user = userID;
 
 /*
 		var alertPopup = $ionicPopup.alert({
@@ -73,7 +189,7 @@ angular.module('starter.controllers', [])
 
 
 
-			   testObject.save(saveString).then(function(object) {
+			   reportObject.save(saveString).then(function(object) {
 			 	  $ionicLoading.hide();
 			 	  $ionicPopup.alert({
 						title: 'Success!',
@@ -108,7 +224,7 @@ angular.module('starter.controllers', [])
 		} else {
 
 			// do regular save
-			testObject.save(saveString).then(function(object) {
+			reportObject.save(saveString).then(function(object) {
 
 				$ionicLoading.hide();
 				$ionicPopup.alert({
@@ -263,16 +379,8 @@ angular.module('starter.controllers', [])
 		
 			this.userLocation =  position.coords.longitude + ','+ position.coords.latitude;
 			document.querySelector('#userLocation').value = this.userLocation;
-			// $ionicLoading.hide();
-			
-			
 		}, function (error) {
-
-			// $ionicLoading.hide();
-			 document.querySelector('#errorBar').style = "display: block";
-			// alert(error.message);
-
-			
+			 document.querySelector('#errorBar').style = "display: block";			
 		},
 		{
 			enableHighAccuracy: true
@@ -290,7 +398,6 @@ angular.module('starter.controllers', [])
 	    });
 	  */
 	  this.getGPS();
-	   
 
 	   
 	};
